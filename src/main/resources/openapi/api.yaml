@@ -1,0 +1,127 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: 'QuickApprovalSystem.TaskInfoGateway'
+  description: 'api для сервиса взаимодействия с согласовантом'
+  contact:
+    name: SolodkovVV
+servers:
+  - url: localhost:8082/api/v1
+tags:
+  - name: message
+paths:
+  /message/user:
+    post:
+      tags:
+        - message
+      description: отправить сообщение пользователю на согласование
+      operationId: messageSend
+      requestBody:
+        description: asd
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageTelegram'
+      responses:
+        '200':
+          description: message sended
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    MessageTelegram:
+      type: object
+      required:
+        - telegramId
+        - text
+        - taskId
+      properties:
+        telegramId:
+          type: integer
+        text:
+          type: string
+        taskId:
+          type: integer
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+    Task:
+      type: object
+      required:
+        - id_task
+        - process_id
+        - user_performer_id
+        - role_performer_id
+        - date_start
+        - date_end_planning
+        - date_end_fact
+        - status_id
+      properties:
+        id_task:
+          type: integer
+        process_id:
+          type: integer
+        user_performer_id:
+          type: integer
+        role_performer_id:
+          type: integer
+        date_start:
+          $ref: '#/components/schemas/Timestamp'
+        date_end_planning:
+          $ref: '#/components/schemas/Timestamp'
+        date_end_fact:
+          $ref: '#/components/schemas/Timestamp'
+        status_id:
+          type: integer
+    Timestamp:
+      type: object
+      required:
+        - date
+        - day
+        - hours
+        - minutes
+        - month
+        - seconds
+        - time
+        - timezoneOffset
+        - year
+      properties:
+        date:
+          type: integer
+          format: int32
+        day:
+          type: integer
+          format: int32
+        hours:
+          type: integer
+          format: int32
+        minutes:
+          type: integer
+          format: int32
+        month:
+          type: integer
+          format: int32
+        seconds:
+          type: integer
+          format: int32
+        time:
+          type: integer
+          format: int64
+        timezoneOffset:
+          type: integer
+          format: int32
+        year:
+          type: integer
+          format: int32

@@ -1,0 +1,14 @@
+server:
+  port: 8082
+telegram:
+  token: 956369237:AAGsI_9k9HzYDP6Q_4IzG9NNuhX-Y6ZDuDg
+  name: QuickApprovalSystemBot
+dbcontroller:
+  port: 8080
+  domain: http://localhost
+  reqAgreedTask:
+    endpoint: /task/{id}/status/agreed
+    method: POST
+  reqDeniedTask:
+    endpoint: /task/{id}/status/denied
+    method: POST
